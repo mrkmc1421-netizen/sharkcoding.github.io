@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SharkMod Editor 🦈</title>
+  <link rel="stylesheet" href="css/shark-style.css">
+  <style>
+    body {
+      margin: 0;
+      background: linear-gradient(#00334d, #001a26);
+      color: white;
+      font-family: Arial;
+    }
+
+    #editorContainer {
+      display: flex;
+      height: 100vh;
+    }
+
+    #blockPalette {
+      width: 300px;
+      background: #004d66;
+      padding: 20px;
+      overflow-y: scroll;
+      border-right: 3px solid #007a99;
+    }
+
+    #workspace {
+      flex: 1;
+      background: #00293d;
+      position: relative;
+    }
+
+    .block {
+      background: #00a3cc;
+      padding: 10px;
+      margin: 8px 0;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: grab;
+    }
+  </style>
+</head>
+
+<body>
+
+<div id="editorContainer">
+  <div id="blockPalette">
+    <h2>🦈 SharkMod Blocks</h2>
+    <div id="blocks"></div>
+  </div>
+
+  <div id="workspace">
+    <h1 style="padding:20px;">SharkMod Ocean IDE</h1>
+  </div>
+</div>
+
+<script src="js/blockloader.js"></script>
+<script src="sharkmod.js"></script>
+<script src="shark-extension.js"></script>
+<script src="shark-runtime.js"></script>
+
+</body>
+  </html>
