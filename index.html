@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SharkMod 🦈🌊</title>
+  <link rel="stylesheet" href="css/shark-style.css">
+  <style>
+    body {
+      margin: 0;
+      background: linear-gradient(#00334d, #001a26);
+      font-family: Arial, sans-serif;
+      color: white;
+    }
+
+    header {
+      padding: 20px;
+      background: #00293d;
+      border-bottom: 3px solid #006080;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 48px;
+      margin: 0;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      padding: 15px;
+      background: #004d66;
+      border-bottom: 3px solid #007a99;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .section {
+      padding: 40px;
+    }
+
+    .card {
+      background: #004d66;
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      border: 2px solid #007a99;
+    }
+
+    .project-card {
+      background: #006080;
+      padding: 15px;
+      border-radius: 8px;
+      margin: 10px 0;
+    }
+
+    button {
+      background: #00a3cc;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      font-size: 18px;
+      cursor: pointer;
+      color: #00293d;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background: #00cce6;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>🦈 SharkMod</h1>
+  <p>The Aquatic Scratch Engine</p>
+</header>
+
+<nav>
+  <a href="#projects">Community Projects</a>
+  <a href="#bites">Bites</a>
+  <a href="editor.html">Launch Editor</a>
+</nav>
+
+<div class="section" id="projects">
+  <h2>🦈 Community Projects</h2>
+  <p>Explore creations made with SharkMod.</p>
+
+  <div id="projectList" class="card">
+    <!-- Projects will load here -->
+  </div>
+</div>
+
+<div class="section" id="bites">
+  <h2>🦈 Bites (Forums & Staff Alerts)</h2>
+  <p>Community discussions, updates, and shark alerts.</p>
+
+  <div id="biteList" class="card">
+    <!-- Bites will load here -->
+  </div>
+
+  <button id="newBiteBtn">Create New Bite</button>
+</div>
+
+<script>
+  // Load community projects
+  const projects = JSON.parse(localStorage.getItem("sharkCommunity") || "[]");
+  const projectList = document.getElementById("projectList");
+
+  projects.forEach((proj, index) => {
+    const card = document.createElement("div");
+    card.className = "project-card";
+    card.innerHTML = `
+      <h3>${proj.name}</h3>
+      <p>By ${proj.author}</p>
+      <button onclick="window.location.href='projectview.html?id=${index}'">Open</button>
+    `;
+    projectList.appendChild(card);
+  });
+
+  // Load bites (forums + staff alerts)
+  const bites = JSON.parse(localStorage.getItem("sharkBites") || "[]");
+  const biteList = document.getElementById("biteList");
+
+  bites.forEach((bite) => {
+    const div = document.createElement("div");
+    div.className = "project-card";
+    div.innerHTML = `
+      <h3>${bite.title}</h3>
+      <p>${bite.content}</p>
+      <small>Posted by ${bite.author}</small>
+    `;
+    biteList.appendChild(div);
+  });
+
+  // Create new bite
+  document.getElementById("newBiteBtn").addEventListener("click", () => {
+    const title = prompt("Bite title?");
+    const content = prompt("Bite content?");
+    const author = prompt("Your name?");
+
+    const newBite = { title, content, author };
+
+    bites.push(newBite);
+    localStorage.setItem("sharkBites", JSON.stringify(bites));
+
+    alert("🦈 New Bite posted!");
+    location.reload();
+  });
+</script>
+
+</body>
+    </html>
