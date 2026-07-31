@@ -48,3 +48,42 @@ function enablePaletteCloning() {
 }
 
 enablePaletteCloning();
+// 🦈 SharkMod Snapping System
+
+const SNAP_DISTANCE = 25;
+
+// Check if two blocks are close enough to snap
+function shouldSnap(blockA, blockB) {
+  const a = blockA.getBoundingClientRect();
+  const b = blockB.getBoundingClientRect();
+
+  const dx = Math.abs(a.left - b.left);
+  const dy = Math.abs(a.bottom - b.top);
+
+  return dx < SNAP_DISTANCE && dy < SNAP_DISTANCE;
+}
+
+// Snap blockA under blockB
+function snapBlock(blockA, blockB) {
+  const b = blockB.getBoundingClientRect();
+
+  blockA.style.left = b.left + "px";
+  blockA.style.top = (b.bottom + 5) + "px";
+
+  blockA.classList.add("ocean-glow");
+}
+
+// Check snapping on mouse release
+document.addEventListener("mouseup", () => {
+  if (!currentDrag) return;
+
+  const blocks = workspace.querySelectorAll(".block");
+
+  blocks.forEach(other => {
+    if (other !== currentDrag && shouldSnap(currentDrag, other)) {
+      snapBlock(currentDrag, other);
+    }
+  });
+
+  currentDrag = null;
+});
