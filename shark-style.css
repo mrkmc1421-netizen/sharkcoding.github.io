@@ -1,0 +1,23 @@
+.ocean-bg {
+  background: linear-gradient(#00334d, #001a26);
+  color: white;
+  font-family: Arial;
+}
+
+.auth-box {
+  width: 300px;
+  margin: 100px auto;
+  padding: 20px;
+  background: #004d66;
+  border-radius: 10px;
+  border: 2px solid #007a99;
+  text-align: center;
+}
+
+.auth-box input {
+  width: 90%;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 6px;
+  border: none;
+}
